@@ -15,4 +15,6 @@ WORKDIR /root/
 
 COPY --from=builder /app/weather-api .
 
+EXPOSE 8080
+
 CMD ["./weather-api"]
