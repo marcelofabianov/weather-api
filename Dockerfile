@@ -7,12 +7,12 @@ RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o cep-race .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o weather-api .
 
 FROM alpine:latest
 
 WORKDIR /root/
 
-COPY --from=builder /app/cep-race .
+COPY --from=builder /app/weather-api .
 
-CMD ["./cep-race"]
+CMD ["./weather-api"]

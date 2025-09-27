@@ -7,7 +7,7 @@ import (
 	"github.com/marcelofabianov/di/config"
 )
 
-func NewSlogLogger(cfg config.LoggerConfig) *slog.Logger {
+func NewSlogLogger(cfg *config.LoggerConfig) *slog.Logger {
 	var level slog.Level
 
 	switch cfg.Level {
