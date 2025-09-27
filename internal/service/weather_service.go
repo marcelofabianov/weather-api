@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	ErrInvalidZipcode  = fault.New("invalid zipcode", fault.WithCode(fault.Invalid))
+	ErrInvalidZipcode  = fault.New("invalid zipcode", fault.WithCode(fault.DomainViolation))
 	ErrZipcodeNotFound = fault.New("can not find zipcode", fault.WithCode(fault.NotFound))
 	ErrWeatherNotFound = fault.New("can not find weather for location", fault.WithCode(fault.Internal))
 )
@@ -45,7 +45,7 @@ func (s *WeatherService) GetWeatherByZipcode(zipcode string) (*model.Weather, er
 		return nil, fault.Wrap(err, ErrWeatherNotFound.Message, fault.WithCode(ErrWeatherNotFound.Code))
 	}
 
-	return model.NewWeather(tempC), nil
+	return model.NewWeather(city, tempC), nil
 }
 
 func (s *WeatherService) isValidZipcode(zipcode string) bool {

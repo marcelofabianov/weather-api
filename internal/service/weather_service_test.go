@@ -40,9 +40,10 @@ func TestWeatherService_GetWeatherByZipcode(t *testing.T) {
 
 		assert.NoError(t, err)
 		assert.NotNil(t, weather)
+		assert.Equal(t, "Goiânia", weather.City)
 		assert.Equal(t, 25.0, weather.TempC)
-		assert.Equal(t, 77.0, weather.TempF)  // 25*1.8 + 32
-		assert.Equal(t, 298.0, weather.TempK) // 25 + 273
+		assert.Equal(t, 77.0, weather.TempF)
+		assert.Equal(t, 298.0, weather.TempK)
 		mockViaCep.AssertExpectations(t)
 		mockWeatherApi.AssertExpectations(t)
 	})
@@ -75,10 +76,8 @@ func TestWeatherService_GetWeatherByZipcode(t *testing.T) {
 
 		assert.Nil(t, weather)
 		assert.Error(t, err)
-
 		assert.True(t, fault.IsInternal(err), "error should have internal code")
 		assert.Contains(t, err.Error(), ErrWeatherNotFound.Message)
-
 		mockViaCep.AssertExpectations(t)
 		mockWeatherApi.AssertExpectations(t)
 	})

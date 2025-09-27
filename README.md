@@ -71,7 +71,7 @@ Retorna a temperatura atual para a cidade correspondente ao CEP informado.
     ```
     *Resposta Esperada (200 OK):*
     ```json
-    {"temp_C":31.3,"temp_F":88.34,"temp_K":304.3}
+    {"city": "Goiânia","temp_C":31.3,"temp_F":88.34,"temp_K":304.3}
     ```
 
 * **CEP Não Encontrado:**
@@ -91,6 +91,37 @@ Retorna a temperatura atual para a cidade correspondente ao CEP informado.
     ```json
     {"message":"invalid zipcode","code":"invalid_input"}
     ```
+* **Usando httpie:**
+
+```bash
+http http://localhost:8080/weather/74305460
+HTTP/1.1 200 OK
+Cache-Control: no-store, no-cache
+Content-Length: 76
+Content-Security-Policy: default-src 'none'
+Content-Type: application/json; charset=utf-8
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Date: Sat, 27 Sep 2025 17:47:00 GMT
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Vary: Origin
+X-Content-Type-Options: nosniff
+X-Dns-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: deny
+X-Ratelimit-Limit: 100
+X-Ratelimit-Remaining: 99
+X-Ratelimit-Reset: 1758995220
+
+{
+    "city": "Goiânia",
+    "temp_C": 32.3,
+    "temp_F": 90.13999999999999,
+    "temp_K": 305.3
+}
+```
 
 ## 🛠️ Executando os Testes
 

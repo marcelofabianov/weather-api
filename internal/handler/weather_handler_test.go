@@ -33,7 +33,7 @@ func TestWeatherHandler_GetWeather(t *testing.T) {
 		router := chi.NewMux()
 		handler.RegisterRoutes(router)
 
-		expectedWeather := model.NewWeather(25.0)
+		expectedWeather := model.NewWeather("Goiânia", 25.0)
 		mockService.On("GetWeatherByZipcode", "74305460").Return(expectedWeather, nil).Once()
 
 		req, _ := http.NewRequest(http.MethodGet, "/weather/74305460", nil)
@@ -42,11 +42,11 @@ func TestWeatherHandler_GetWeather(t *testing.T) {
 		router.ServeHTTP(rr, req)
 
 		assert.Equal(t, http.StatusOK, rr.Code)
-		assert.JSONEq(t, `{"temp_C": 25.0, "temp_F": 77.0, "temp_K": 298.0}`, rr.Body.String())
+		assert.JSONEq(t, `{"city":"Goiânia", "temp_C": 25.0, "temp_F": 77.0, "temp_K": 298.0}`, rr.Body.String())
 		mockService.AssertExpectations(t)
 	})
 
-	t.Run("should return 400 Bad Request for invalid zipcode", func(t *testing.T) {
+	t.Run("should return 422 Unprocessable Entity for invalid zipcode", func(t *testing.T) {
 		mockService := new(MockWeatherService)
 		handler := NewWeatherHandler(mockService)
 		router := chi.NewMux()
@@ -59,8 +59,8 @@ func TestWeatherHandler_GetWeather(t *testing.T) {
 
 		router.ServeHTTP(rr, req)
 
-		assert.Equal(t, http.StatusBadRequest, rr.Code)
-		assert.Contains(t, rr.Body.String(), `"code":"invalid_input"`)
+		assert.Equal(t, http.StatusUnprocessableEntity, rr.Code)
+		assert.Contains(t, rr.Body.String(), `"code":"domain_violation"`)
 		mockService.AssertExpectations(t)
 	})
 
