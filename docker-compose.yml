@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: .
+    image: marcelofabiano/weather-api
+    container_name: weather-api
+    tty: true
+    stdin_open: true
