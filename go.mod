@@ -8,7 +8,6 @@ require (
 	github.com/go-chi/httprate v0.15.0
 	github.com/go-playground/validator/v10 v10.27.0
 	github.com/jpillora/backoff v1.0.0
-	github.com/marcelofabianov/di v0.0.0-20250913010157-31cbecda8002
 	github.com/marcelofabianov/fault v1.4.0
 	github.com/sony/gobreaker v1.0.0
 	github.com/spf13/viper v1.21.0
