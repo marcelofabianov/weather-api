@@ -154,3 +154,7 @@ A aplicação é configurada através de variáveis de ambiente, seguindo os pri
 | `APP_CLIENTS_WEATHERAPI_KEY` | **(Obrigatório)** Chave de API para autenticar na WeatherAPI.com. | `""` |
 
 *Para outras configurações, como as de CORS, por favor, consulte o arquivo `.env.example` para a lista completa de opções.*
+
+## Deploy do projeto no Google Cloud Run
+
+Para detalhes do deploy confira: [DEPLOY.md](DEPLOY.md)
